@@ -9,7 +9,7 @@ class Director():
             
         from Jumper.support import word
         from Jumper.terminal_service import TerminalService
-        from Jumper.skydiver import Skydiver
+        # from Jumper.skydiver import Skydiver
         from Jumper.assets import JumperGraphic
 
 
