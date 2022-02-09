@@ -60,7 +60,7 @@ class TerminalService():
             pass
 
         elif len(guessed_letters) == 1:
-            print(f"Guessed letter: {guessed_letters[0]}", end="")
+            print(f"Guessed letter: {guessed_letters[0]}")
 
         elif len(guessed_letters) > 1:
             
@@ -69,6 +69,7 @@ class TerminalService():
             print("Guessed letters: ", end="")
             for i in guessed_letters:
                 print(i, ", ", end="")
+            print()
 
         else:
             print("terminal_service.py -> TerminalService -> print_guessed_letters has failed to find a length of guessed_letters")
