@@ -2,23 +2,28 @@ import sys
 class TerminalService():
     """A service that handles terminal operations
     
-    The responsibility of the TerminalService is to provide input and output operations for the terminal"""
+    The responsibility of the TerminalService is to provide any needed input and output operations for the terminal"""
     
     def __init__(self):
+        """Constructs a new TerminalService
+        
+        Args:
+            self (Director): an instance of Director"""
         pass
 
 
-    def read_text(self, prompt):
-        return input(prompt)
+    # def read_text(self, prompt):
+    #     return input(prompt)
 
-    def write_text(self, text):
-        print(text)
+    # def write_text(self, text):
+    #     print(text)
         
+
     def clear_lines(self, lines):
-        """Clears as many lines as you want.
+        """Clears as many lines from the terminal as you want.
         
         Args:
-            self: an instance of itself
+            self (TerminalService): an instance of TerminalService
             lines: integer, how many lines you want cleared.
         """
         
@@ -30,14 +35,27 @@ class TerminalService():
             # Delete last line
             sys.stdout.write(f'\x1b[2K')
 
+
     def print_printable_word(self, printable_word):
+        """Prints the word the player will see.
+        
+        Args:
+            self (TerminalService): an instance of TerminalService
+            printable_word: list, a list of the letters and underscores that make up the word the viewer will see.
+        """
         print("Word:", end="")
         for i in printable_word:
             print(" ", i, end="")
-            # print (i, end="")
         print()
 
+
     def print_guessed_letters(self, guessed_letters):
+        """Prints the word the player will see.
+        
+        Args:
+            self (TerminalService): an instance of TerminalService
+            printable_word: list, a list of the letters the player has guessed.
+        """
         if len(guessed_letters) < 1:
             pass
 

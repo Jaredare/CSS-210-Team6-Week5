@@ -2,7 +2,7 @@ class Director():
     """-"""
     
     def __init__(self):
-        """Constructs a new Director
+        """Constructs a new Director and populates variables.
         
         Args:
             self (Director): an instance of Director"""
@@ -45,14 +45,15 @@ class Director():
             
 
     def _get_inputs(self):
-        """Asks the player to guess a letter from a-z. 
+        """Asks the player to guess a letter from a-z and validates it.
         
         Args:
             self (Director): An instance of Director.
         """
         get_input_loop = True
         while get_input_loop:
-            playerGuess = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
+            # playerGuess = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
+            playerGuess = input(f"Guess a letter [a-z]: ")
             if playerGuess.isalpha() and len(playerGuess) == 1 and self.guessed_letters.count(playerGuess.upper()) < 1:
                 get_input_loop = False
             elif playerGuess.isalpha() and len(playerGuess) == 1 and self.guessed_letters.count(playerGuess.upper()) >= 1:
@@ -81,6 +82,14 @@ class Director():
         
 
     def _handle_screen(self, guessed_letters, parachute_damage, printable_word):
+        """Displays the jumper, word, and already guessed letters after clearing the screen.
+
+        Args:
+            self (Director): An instance of Director.
+            guessed_letters: list, a list of what letters have been guessed
+            parachute_damage: int, a number 0-4 to represent how close you are to failing.
+            printable_word: list, the word you're trying to guess with _s instead of any letters you haven't guessed.        
+        """
         
         self._terminal_service.clear_lines(100)
         # print("Start of self._in_playing loop")
