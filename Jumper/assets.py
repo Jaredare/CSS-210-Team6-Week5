@@ -5,16 +5,16 @@ class JumperGraphic():
         """Contains the jumper graphics of losing the parachute, 0 being undamaged and 4 being a fail state. """
         if parachute_damage == 0:
             # Unharmed parachute [0]
-            parachute_graphic = "  ___  \n /___\ \n \   / \n  \ /  \n   0   \n  /|\  \n  / \  \n\n^^^^^^^"
+            parachute_graphic = "  ___  \n /___\ \n \   / \n  \ /  \n   O   \n  /|\  \n  / \  \n\n^^^^^^^"
         elif parachute_damage == 1:
             # [1]
-            parachute_graphic = "       \n /___\ \n \   / \n  \ /  \n   0   \n  /|\  \n  / \  \n\n^^^^^^^"
+            parachute_graphic = "       \n /___\ \n \   / \n  \ /  \n   O   \n  /|\  \n  / \  \n\n^^^^^^^"
         elif parachute_damage == 2:
             # [2]
-            parachute_graphic = "       \n       \n \   / \n  \ /  \n   0   \n  /|\  \n  / \  \n\n^^^^^^^"
+            parachute_graphic = "       \n       \n \   / \n  \ /  \n   O   \n  /|\  \n  / \  \n\n^^^^^^^"
         elif parachute_damage == 3:
             # [3]
-            parachute_graphic = "       \n       \n       \n  \ /  \n   0   \n  /|\  \n  / \  \n\n^^^^^^^"
+            parachute_graphic = "       \n       \n       \n  \ /  \n   O   \n  /|\  \n  / \  \n\n^^^^^^^"
         elif parachute_damage == 4:
             # Fail state [4]
             parachute_graphic = "       \n       \n       \n       \n   x   \n  /|\  \n  / \  \n\n^^^^^^^"
