@@ -15,12 +15,12 @@ class TerminalService():
         print(text)
         
     def clear_screen(self):
-        """Clears the screen based on how tall it is as set at the top of the file."""
+        """Clears the screen based on how tall it is as set in the hieght variable."""
 
         height = 15
         
         for _ in range(height):
-            # Deletes the last height lines
+            # Deletes the last "height" lines
 
             # Cursor up 1 line
             sys.stdout.write(f'\x1b[1A')
@@ -39,7 +39,7 @@ class TerminalService():
             pass
 
         elif len(guessed_letters) == 1:
-            print(f"Guessed letter: {guessed_letters[0]}")
+            print(f"Guessed letter: {guessed_letters[0]}", end="")
 
         elif len(guessed_letters) > 1:
             

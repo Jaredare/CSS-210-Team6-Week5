@@ -18,6 +18,8 @@ class JumperGraphic():
         elif parachute_damage == 4:
             # Fail state [4]
             parachute_graphic = "       \n       \n       \n       \n   x   \n  /|\  \n  / \  \n\n^^^^^^^"
+        else:
+            parachute_graphic = "Something bad happened, you went past our failure state. \nI guess your jumper is dead. :("
         return parachute_graphic
 
 

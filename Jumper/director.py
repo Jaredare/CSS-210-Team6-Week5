@@ -32,22 +32,15 @@ class Director():
         """
         
         while self._is_playing:
-            print("Start of self._in_playing loop")
-            #Needed steps:
-            # The player receives a pop up with:
-            self._terminal_service.print_printable_word(self.printable_word)    # the printable word,
-            self._jumper.display_jumper_graphic(self.parachute_damage)          # the jumper, 
-            self._terminal_service.print_guessed_letters(self.guessed_letters)  # the already guessed letters, 
-            playerGuess = self._get_inputs()                                    # and an input to guess a letter.
-            # print(f"The word you are trying to guess is: {self._word.word}")
-
-
-
-
-
-
+            # Needed steps:
+            # The player receives a pop up with:            
+            self._handle_screen(self.guessed_letters, self.parachute_damage, self.printable_word) # the printable word, the jumper, the already guessed letters, 
+            playerGuess = self._get_inputs()   # and an input to guess a letter.
             
+            # The player's guess is added to the list of guessed letters and the printable word is returned.
             self.printable_word = self._do_updates(playerGuess)
+
+
             # self._do_outputs(self.guessed_letters, self.parachute_damage)
             
 
@@ -72,15 +65,28 @@ class Director():
         self.guessed_letters.append(playerGuess.upper())
         return self._word.formulate_printable_word(self.guessed_letters)
         
+
+    def _handle_screen(self, guessed_letters, parachute_damage, printable_word):
+        
+        self._terminal_service.clear_screen()
+        # print("Start of self._in_playing loop")
+        # print(f"The word you are trying to guess is: {self._word.word}")   
+
+        # The player receives a pop up with:
+        self._terminal_service.print_printable_word(printable_word)    # the printable word,
+        print(self._jumper.display_jumper_graphic(parachute_damage))   # the jumper, 
+        self._terminal_service.print_guessed_letters(guessed_letters)  # the already guessed letters, 
+
     
-    def _do_outputs(self, guessed_letters, parachute_damage):
-        """Displays jumper graphic, and a bank of guessed letters. """
-        print()
-        print(f"parachute_damage = {parachute_damage}\nPrinting Jumper:")
-        self._jumper.display_jumper_graphic(parachute_damage)
-        print(f"Printing guessed letters:")
-        self._terminal_service.print_guessed_letters(guessed_letters)
-        print()
+    # def _do_outputs(self, guessed_letters, parachute_damage):
+    #     """Displays jumper graphic, and a bank of guessed letters. """
+    #     print()
+    #     print(f"parachute_damage = {parachute_damage}\nPrinting Jumper:")
+    #     self._jumper.display_jumper_graphic(parachute_damage)
+    #     print(f"Printing guessed letters:")
+    #     self._terminal_service.print_guessed_letters(guessed_letters)
+    #     print()
+
 
 
 
