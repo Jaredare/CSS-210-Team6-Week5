@@ -33,8 +33,8 @@ class Director():
         
         while self._is_playing:
             # Needed steps:
-            # The player receives a pop up with:            
-            self._handle_screen(self.guessed_letters, self.parachute_damage, self.printable_word) # the printable word, the jumper, the already guessed letters, 
+            # The player receives a pop up with:
+            self._handle_screen(self.guessed_letters, self.parachute_damage, self.printable_word) # the jumper, the printable word, the already guessed letters, 
             playerGuess = self._get_inputs()   # and an input to guess a letter.
             
             # The player's guess is added to the list of guessed letters and the printable word is returned.
@@ -50,8 +50,22 @@ class Director():
         Args:
             self (Director): An instance of Director.
         """
-        playerGuess = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
-        return playerGuess
+        get_input_loop = True
+        while get_input_loop:
+            playerGuess = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
+            if playerGuess.isalpha() and len(playerGuess) == 1 and self.guessed_letters.count(playerGuess.upper()) < 1:
+                get_input_loop = False
+            elif playerGuess.isalpha() and len(playerGuess) == 1 and self.guessed_letters.count(playerGuess.upper()) >= 1:
+                print("You already guessed that letter, please try a different letter.")
+            elif playerGuess.isalpha() and len(playerGuess) > 1 and self.guessed_letters.count(playerGuess.upper()) < 1:
+                print("Sorry, that was more than one character. Please input one letter.")
+            elif not playerGuess.isalpha() and len(playerGuess) > 1:
+                print("Wow, that was both too many characters *and* wasn't alphabetical. Please put just one letter.")
+            else:
+                print("Sorry, that wasn an invalid character. Please try a letter.")
+            
+
+        return playerGuess.upper()
         
 
     def _do_updates(self, playerGuess):
@@ -68,13 +82,13 @@ class Director():
 
     def _handle_screen(self, guessed_letters, parachute_damage, printable_word):
         
-        self._terminal_service.clear_screen()
+        self._terminal_service.clear_lines(100)
         # print("Start of self._in_playing loop")
         # print(f"The word you are trying to guess is: {self._word.word}")   
 
         # The player receives a pop up with:
-        self._terminal_service.print_printable_word(printable_word)    # the printable word,
         print(self._jumper.display_jumper_graphic(parachute_damage))   # the jumper, 
+        self._terminal_service.print_printable_word(printable_word)    # the printable word,
         self._terminal_service.print_guessed_letters(guessed_letters)  # the already guessed letters, 
 
     

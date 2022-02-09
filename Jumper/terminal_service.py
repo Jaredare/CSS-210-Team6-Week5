@@ -14,12 +14,15 @@ class TerminalService():
     def write_text(self, text):
         print(text)
         
-    def clear_screen(self):
-        """Clears the screen based on how tall it is as set in the hieght variable."""
-
-        height = 15
+    def clear_lines(self, lines):
+        """Clears as many lines as you want.
         
-        for _ in range(height):
+        Args:
+            self: an instance of itself
+            lines: integer, how many lines you want cleared.
+        """
+        
+        for _ in range(lines):
             # Deletes the last "height" lines
 
             # Cursor up 1 line
