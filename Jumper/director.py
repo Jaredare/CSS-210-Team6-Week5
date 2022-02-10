@@ -20,8 +20,11 @@ class Director():
         self._is_playing = True
 
         self.parachute_damage = 0
+        self.player_errors = 0
+   
         self.guessed_letters = []
         self.printable_word = self._word.formulate_printable_word(self.guessed_letters)
+        # self.parachute_damage = self._word.handle_parachute_damage(self.guessed_letters, parachute_damage=3)
         
         
     def start_game(self):
@@ -35,15 +38,33 @@ class Director():
             # Needed steps:
             # The player receives a pop up with:
             self._handle_screen(self.guessed_letters, self.parachute_damage, self.printable_word) # the jumper, the printable word, the already guessed letters, 
-            playerGuess = self._get_inputs()   # and an input to guess a letter.
+            printable_word_copy=self.printable_word
+
+            player_word = self.printable_word
+            original_word = self._word.word_win()
             
+            if self.player_errors != 4:
+                playerGuess = self._get_inputs()   # and an input to guess a letter.
+            else:
+                self._is_playing = False
             # The player's guess is added to the list of guessed letters and the printable word is returned.
+            
+                   
             self.printable_word = self._do_updates(playerGuess)
+            
+            if original_word == player_word:
+                print("a winner is you")
+                self._is_playing = False
 
-
+            if printable_word_copy != self.printable_word:
+                pass
+            else:
+                self.player_errors +=1
+            
+            self.parachute_damage = self._word.handle_parachute_damage(self.guessed_letters, parachute_damage=self.player_errors)
             # self._do_outputs(self.guessed_letters, self.parachute_damage)
             
-
+            
     def _get_inputs(self):
         """Asks the player to guess a letter from a-z and validates it.
         
@@ -80,6 +101,7 @@ class Director():
         self.guessed_letters.append(playerGuess.upper())
         return self._word.formulate_printable_word(self.guessed_letters)
         
+        
 
     def _handle_screen(self, guessed_letters, parachute_damage, printable_word):
         """Displays the jumper, word, and already guessed letters after clearing the screen.
@@ -99,7 +121,6 @@ class Director():
         print(self._jumper.display_jumper_graphic(parachute_damage))   # the jumper, 
         self._terminal_service.print_printable_word(printable_word)    # the printable word,
         self._terminal_service.print_guessed_letters(guessed_letters)  # the already guessed letters, 
-
     
     # def _do_outputs(self, guessed_letters, parachute_damage):
     #     """Displays jumper graphic, and a bank of guessed letters. """

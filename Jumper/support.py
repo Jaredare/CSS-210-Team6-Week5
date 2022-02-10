@@ -1,6 +1,5 @@
 import random
 
-
 class word:
 
 
@@ -15,6 +14,14 @@ class word:
         self.words_list = temp_list
         self.word = list(random.choice(self.words_list))
 
+    def word_win(self):
+
+        final_print = []
+        for i in self.word:
+            final_print.append(i)
+            
+
+        return final_print
 
     def formulate_printable_word(self, guessed_letters):
         """ 
@@ -43,19 +50,36 @@ class word:
 
         return final_print
 
-    def handle_parachute_damage(self, guessed_letters):
+    def handle_parachute_damage(self, guessed_letters, parachute_damage):
         """
         
-        Call this into self.parachute_damage. "self.parachute_damage = handle_parachute_damage(guessed_letters)"
+        Call this into self.parachute_damage. "self.parachute_damage = handle_parachute_damage(guessed_letters, parachute_damage)"
         Checks each letter that has been guessed, and returns how many are not in the word that is supposed to be guessed. 
 
 
         Output example: integer, 2
         
         """
-
-
-
+        
+        while guessed_letters != len(range(4)) and guessed_letters in self.word:
+            
+            for letter in guessed_letters:
+                if guessed_letters == len(range(1)) and letter not in self.word:
+                    parachute_damage == 1
+                elif guessed_letters == len(range(2)) and letter not in self.word:
+                    parachute_damage == 2
+                elif guessed_letters == len(range(3)) and letter not in self.word:
+                    parachute_damage == 3
+                elif guessed_letters == len(range(4)) and letter not in self.word:
+                    parachute_damage == 4
+                    print('Game over.')
+                elif guessed_letters < len(range(4)) and letter in self.word:
+                    print('Congratulations! You guessed the word!')
+                
+        return parachute_damage
+        
+        
+            
 # -- OLD SUPPORT.PY --
 
 
